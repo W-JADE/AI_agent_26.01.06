@@ -1,26 +1,26 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 
 app = FastAPI()
 
 @app.get("/")
 def read_root() :
     obj = {
-        "message" : "안녕하세요!",
-        "user": "실습시간입니다!"
+        "message": "안녕하세요!",
+        "user": "KBJ"
     }
     return obj
 
+
 @app.get("/hello")
-def hello01(name="hong") :
-    print("name is", name)
+def hello(name="hong") :
+    print("[GET] name is", name)
     return {
-        "name":name
+        "name": name
     }
     
 @app.post("/hello")
-def hello02(name="hong") :
-    print("name is", name)
+def hello2(name:str=Form(...)) :
+    print("[POST] name is", name)
     return {
-        "name":name
+        "name": name
     }
-    

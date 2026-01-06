@@ -8,9 +8,22 @@
 <body>
     <h1>개인 정보 입력</h1>
     <form action="http://127.0.0.1:8000/hello" method="get">
-        <label for=""></label>
-        <input type="text" name="name" value="lee">
-        <input type="submit" value="전송">
+        <fieldset>
+            <legend>GET으로 요청</legend>
+            <label for="">성명: </label>
+            <input type="text" name="name" value="lee">
+            <input type="submit" value="전송">
+        </fieldset>
+    </form>
+    <form action="http://127.0.0.1:8000/hello" method="post">
+        <fieldset>
+            <legend>POST으로 요청</legend>
+            <label for="">성명: </label>
+            <input type="text" name="name" value="lee"><br>
+            <label for="">비밀번호: </label>
+            <input type="password" name="password" value="12345">
+            <input type="submit" value="전송">
+        </fieldset>
     </form>
 </body>
 </html>
