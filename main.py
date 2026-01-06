@@ -1,26 +1,36 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, Request
+from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
+from pathlib import Path
+from datetime import datetime
+import csv
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
+
 @app.get("/")
-def read_root() :
-    obj = {
-        "message": "안녕하세요!",
-        "user": "KBJ"
-    }
-    return obj
-
-
-@app.get("/hello")
-def hello(name="hong") :
-    print("[GET] name is", name)
-    return {
-        "name": name
-    }
+def introduction(request:Request) :
+    return templates.TemplateResponse(
+        "join-us.html",{"request":request}
+    )
     
-@app.post("/hello")
-def hello2(name:str=Form(...)) :
-    print("[POST] name is", name)
+@app.post("/join")
+def introduction(
+    requst : Request,
+    name : str =Form(...),
+    age : str =Form(...),
+    address : str =Form(...),
+    phone : str =Form(...),
+    email : str =Form(...),
+    gender : str =Form(...)
+) :
+    print(">>> [POST] - /join", name,address,age,email,phone,gender)
     return {
-        "name": name
+        "name" : name,
+        "age" : age,
+        "address" : address,
+        "phone" : phone,
+        "email" : email,
+        "gender" : gender,
     }
